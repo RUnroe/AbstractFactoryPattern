@@ -24,7 +24,7 @@ namespace RyanUnroe_Factory
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        
+        int idCount = 0;
         Client client = new Client();
         public MainPage()
         {
@@ -44,19 +44,31 @@ namespace RyanUnroe_Factory
         private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
             //Call client method
+            client.AddButtonToList(value.Text, parseInput(height.Text), parseInput(width.Text), parseInput(top.Text), parseInput(left.Text));
             //Draw on screen
+            TextBlock textBlock = new TextBlock();
+            textBlock.Name = $"{idCount++}";
+            textBlock.Text = ($"Button (value:{value.Text}, height:{height.Text}, width:{width.Text}, top:{top.Text}, left:{left.Text})");
+            elementOutput.Children.Add(textBlock);
         }
 
         private void CreateTextBlock_Click(object sender, RoutedEventArgs e)
         {
             //Call client method
+            client.AddTextBlockToList(value.Text, parseInput(height.Text), parseInput(width.Text), parseInput(top.Text), parseInput(left.Text));
             //Draw on screen
+            TextBlock textBlock = new TextBlock();
+            textBlock.Name = $"{idCount++}";
+            textBlock.Text = ($"Text Block (value:{value.Text}, height:{height.Text}, width:{width.Text}, top:{top.Text}, left:{left.Text})");
+            elementOutput.Children.Add(textBlock);
         }
 
         private void RemoveLastElement_Click(object sender, RoutedEventArgs e)
         {
             //Call client method
+            client.RemoveLastElementFromList();
             //Draw on screen
+            elementOutput.Children.Remove(elementOutput.Children.Last());
         }
 
         private void ExportXAML_Click(object sender, RoutedEventArgs e)

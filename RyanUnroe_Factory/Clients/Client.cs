@@ -29,8 +29,11 @@ namespace RyanUnroe_Factory.Clients
         }
         public void RemoveLastElementFromList()
         {
-            HTMLelements.Remove(HTMLelements.Last());
-            XAMLelements.Remove(XAMLelements.Last());
+            if (HTMLelements.Count > 0)
+            {
+                HTMLelements.Remove(HTMLelements.Last());
+                XAMLelements.Remove(XAMLelements.Last());
+            }
         }
         public void ExportXAML()
         {
