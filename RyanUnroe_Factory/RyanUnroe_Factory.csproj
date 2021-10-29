@@ -128,6 +128,7 @@
     <Compile Include="Factories\XAMLFactory.cs" />
     <Compile Include="Interfaces\Element.cs" />
     <Compile Include="Interfaces\ILanguageFactory.cs" />
+    <Compile Include="Interfaces\TextBlock.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

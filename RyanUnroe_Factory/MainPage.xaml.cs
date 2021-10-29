@@ -1,4 +1,6 @@
-﻿using System;
+﻿using RyanUnroe_Factory.Clients;
+using RyanUnroe_Factory.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,23 +24,39 @@ namespace RyanUnroe_Factory
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        
+        Client client = new Client();
         public MainPage()
         {
             this.InitializeComponent();
         }
+
+        private int parseInput(string input)
+        {
+            if(Int32.TryParse(input, out int number))
+            {
+                return number;
+            }
+            return 0;
+        }
+
+        //Buttons call methods in client
         private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
-
+            //Call client method
+            //Draw on screen
         }
 
         private void CreateTextBlock_Click(object sender, RoutedEventArgs e)
         {
-
+            //Call client method
+            //Draw on screen
         }
 
         private void RemoveLastElement_Click(object sender, RoutedEventArgs e)
         {
-
+            //Call client method
+            //Draw on screen
         }
 
         private void ExportXAML_Click(object sender, RoutedEventArgs e)
