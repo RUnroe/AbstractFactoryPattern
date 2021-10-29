@@ -71,14 +71,59 @@ namespace RyanUnroe_Factory
             elementOutput.Children.Remove(elementOutput.Children.Last());
         }
 
-        private void ExportXAML_Click(object sender, RoutedEventArgs e)
+        private async void ExportXAML_Click(object sender, RoutedEventArgs e)
         {
+            string fileContent = $"<Page\n" +
+                "x: Class = 'Generated.MainPage'\n" +
+                "xmlns = 'http://schemas.microsoft.com/winfx/2006/xaml/presentation'\n" +
+                "xmlns: x = 'http://schemas.microsoft.com/winfx/2006/xaml'\n" +
+                "xmlns: local = 'using:Generated'\n" +
+                "xmlns: d = 'http://schemas.microsoft.com/expression/blend/2008'\n" +
+                "xmlns: mc = 'http://schemas.openxmlformats.org/markup-compatibility/2006'\n" +
+                "mc: Ignorable = 'd'\n" +
+                "Background = '{ThemeResource ApplicationPageBackgroundThemeBrush}' >\n" + 
+                "<Grid>";
+            foreach (Element el in client.XAMLelements)
+            {
+                fileContent += $"{ el.getCode()}\n";
+            }
 
+            fileContent += "</Grid>\n" +
+                "</Page> ";
+
+            Windows.Storage.StorageFolder storageFolder =
+                Windows.Storage.ApplicationData.Current.LocalFolder;
+            Windows.Storage.StorageFile sampleFile =
+                await storageFolder.CreateFileAsync("sample.xaml",
+                    Windows.Storage.CreationCollisionOption.ReplaceExisting);
+            await Windows.Storage.FileIO.WriteTextAsync(sampleFile, fileContent);
         }
 
-        private void ExportHTML_Click(object sender, RoutedEventArgs e)
+        private async void ExportHTML_Click(object sender, RoutedEventArgs e)
         {
+            string fileContent = "<!DOCTYPE html>\n" +
+                "<html lang='en'>\n" +
+                "<head>\n" +
+                "<meta charset='UTF-8'>\n" +
+                "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n" +
+                "<meta name = 'viewport' content='width=device-width, initial-scale=1.0'>\n" +
+                "<title> Sample HTML </title>\n" +
+                "</head>\n" +
+                "<body>\n";
+            foreach (Element el in client.HTMLelements)
+            {
+                fileContent += $"{ el.getCode()}\n";
+            }
 
+            fileContent += "</body>\n" +
+                "</html> ";
+
+            Windows.Storage.StorageFolder storageFolder =
+                Windows.Storage.ApplicationData.Current.LocalFolder;
+            Windows.Storage.StorageFile sampleFile =
+                await storageFolder.CreateFileAsync("sample.html",
+                    Windows.Storage.CreationCollisionOption.ReplaceExisting);
+            await Windows.Storage.FileIO.WriteTextAsync(sampleFile, fileContent);
         }
     }
 }

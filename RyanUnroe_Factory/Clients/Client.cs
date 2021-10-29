@@ -11,8 +11,8 @@ namespace RyanUnroe_Factory.Clients
     public class Client
     {
         //List of elements (buttons and textblocks)
-        List<Element> HTMLelements = new List<Element>();
-        List<Element> XAMLelements = new List<Element>();
+        public List<Element> HTMLelements = new List<Element>();
+        public List<Element> XAMLelements = new List<Element>();
         //Create and store factories
         public ILanguageFactory HTMLfactory = new HTMLFactory();
         public ILanguageFactory XAMLfactory = new XAMLFactory();
@@ -41,7 +41,7 @@ namespace RyanUnroe_Factory.Clients
         }
         public void ExportHTML()
         {
-
+            
         }
     }
 }
