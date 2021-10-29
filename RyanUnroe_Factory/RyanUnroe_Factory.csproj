@@ -119,6 +119,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Clients\Client.cs" />
+    <Compile Include="Elements\XAMLButtonElement.cs" />
+    <Compile Include="Elements\HTMLButtonElement.cs" />
+    <Compile Include="Elements\HTMLTextBlockElement.cs" />
+    <Compile Include="Elements\XAMLTextBlockElement.cs" />
+    <Compile Include="Interfaces\Element.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -153,6 +159,9 @@
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.10</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Factories\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
