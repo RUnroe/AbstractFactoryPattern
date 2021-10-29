@@ -124,7 +124,10 @@
     <Compile Include="Elements\HTMLButtonElement.cs" />
     <Compile Include="Elements\HTMLTextBlockElement.cs" />
     <Compile Include="Elements\XAMLTextBlockElement.cs" />
+    <Compile Include="Factories\HTMLFactory.cs" />
+    <Compile Include="Factories\XAMLFactory.cs" />
     <Compile Include="Interfaces\Element.cs" />
+    <Compile Include="Interfaces\ILanguageFactory.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -160,9 +163,7 @@
       <Version>6.2.10</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Factories\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

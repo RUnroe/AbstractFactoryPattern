@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RyanUnroe_Factory.Elements
 {
-    class HTMLButtonElement : Element
+    public class HTMLButtonElement : Element
     {
         public HTMLButtonElement(string value, int height, int width, int top, int left)
         : base(value, height, width, top, left) { }
