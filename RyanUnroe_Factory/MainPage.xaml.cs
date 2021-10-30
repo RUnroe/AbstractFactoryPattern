@@ -25,26 +25,29 @@ namespace RyanUnroe_Factory
     public sealed partial class MainPage : Page
     {
         int idCount = 0;
-        Client client = new Client();
+        IClient HTMLclient = new HTMLClient();
+        IClient XAMLclient = new XAMLClient();
+
+        List<Dictionary<string, string>> elements = new List<Dictionary<string, string>>();
+        
         public MainPage()
         {
             this.InitializeComponent();
         }
 
-        private int parseInput(string input)
-        {
-            if(Int32.TryParse(input, out int number))
-            {
-                return number;
-            }
-            return 0;
-        }
+        
 
         //Buttons call methods in client
         private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
-            //Call client method
-            client.AddButtonToList(value.Text, parseInput(height.Text), parseInput(width.Text), parseInput(top.Text), parseInput(left.Text));
+            Dictionary<string, string> button = new Dictionary<string, string>();
+            button.Add("type", "button");
+            button.Add("value", value.Text);
+            button.Add("height", height.Text);
+            button.Add("width", width.Text);
+            button.Add("top", top.Text);
+            button.Add("left", left.Text);
+            elements.Add(button);
             //Draw on screen
             TextBlock textBlock = new TextBlock();
             textBlock.Name = $"{idCount++}";
@@ -54,8 +57,15 @@ namespace RyanUnroe_Factory
 
         private void CreateTextBlock_Click(object sender, RoutedEventArgs e)
         {
-            //Call client method
-            client.AddTextBlockToList(value.Text, parseInput(height.Text), parseInput(width.Text), parseInput(top.Text), parseInput(left.Text));
+
+            Dictionary<string, string> text = new Dictionary<string, string>();
+            text.Add("type", "text");
+            text.Add("value", value.Text);
+            text.Add("height", height.Text);
+            text.Add("width", width.Text);
+            text.Add("top", top.Text);
+            text.Add("left", left.Text);
+            elements.Add(text);
             //Draw on screen
             TextBlock textBlock = new TextBlock();
             textBlock.Name = $"{idCount++}";
@@ -66,64 +76,21 @@ namespace RyanUnroe_Factory
         private void RemoveLastElement_Click(object sender, RoutedEventArgs e)
         {
             //Call client method
-            client.RemoveLastElementFromList();
-            //Draw on screen
-            elementOutput.Children.Remove(elementOutput.Children.Last());
+            if (elements.Count != 0)
+            {
+                elements.Remove(elements.Last());
+                //Draw on screen
+                elementOutput.Children.Remove(elementOutput.Children.Last());
+            }
         }
 
-        private async void ExportXAML_Click(object sender, RoutedEventArgs e)
+        private void ExportXAML_Click(object sender, RoutedEventArgs e)
         {
-            string fileContent = $"<Page\n" +
-                "x: Class = 'Generated.MainPage'\n" +
-                "xmlns = 'http://schemas.microsoft.com/winfx/2006/xaml/presentation'\n" +
-                "xmlns: x = 'http://schemas.microsoft.com/winfx/2006/xaml'\n" +
-                "xmlns: local = 'using:Generated'\n" +
-                "xmlns: d = 'http://schemas.microsoft.com/expression/blend/2008'\n" +
-                "xmlns: mc = 'http://schemas.openxmlformats.org/markup-compatibility/2006'\n" +
-                "mc: Ignorable = 'd'\n" +
-                "Background = '{ThemeResource ApplicationPageBackgroundThemeBrush}' >\n" + 
-                "<Grid>";
-            foreach (Element el in client.XAMLelements)
-            {
-                fileContent += $"{ el.getCode()}\n";
-            }
-
-            fileContent += "</Grid>\n" +
-                "</Page> ";
-
-            Windows.Storage.StorageFolder storageFolder =
-                Windows.Storage.ApplicationData.Current.LocalFolder;
-            Windows.Storage.StorageFile sampleFile =
-                await storageFolder.CreateFileAsync("sample.xaml",
-                    Windows.Storage.CreationCollisionOption.ReplaceExisting);
-            await Windows.Storage.FileIO.WriteTextAsync(sampleFile, fileContent);
+            XAMLclient.Export(elements);
         }
-
-        private async void ExportHTML_Click(object sender, RoutedEventArgs e)
+        private void ExportHTML_Click(object sender, RoutedEventArgs e)
         {
-            string fileContent = "<!DOCTYPE html>\n" +
-                "<html lang='en'>\n" +
-                "<head>\n" +
-                "<meta charset='UTF-8'>\n" +
-                "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n" +
-                "<meta name = 'viewport' content='width=device-width, initial-scale=1.0'>\n" +
-                "<title> Sample HTML </title>\n" +
-                "</head>\n" +
-                "<body>\n";
-            foreach (Element el in client.HTMLelements)
-            {
-                fileContent += $"{ el.getCode()}\n";
-            }
-
-            fileContent += "</body>\n" +
-                "</html> ";
-
-            Windows.Storage.StorageFolder storageFolder =
-                Windows.Storage.ApplicationData.Current.LocalFolder;
-            Windows.Storage.StorageFile sampleFile =
-                await storageFolder.CreateFileAsync("sample.html",
-                    Windows.Storage.CreationCollisionOption.ReplaceExisting);
-            await Windows.Storage.FileIO.WriteTextAsync(sampleFile, fileContent);
+            HTMLclient.Export(elements);
         }
     }
 }

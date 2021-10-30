@@ -10,12 +10,12 @@ namespace RyanUnroe_Factory.Factories
 {
     public class HTMLFactory : ILanguageFactory
     {
-        public Element CreateButton(string value, int height, int width, int top, int left)
+        public Element CreateButton(string value, string height, string width, string top, string left)
         {
             return new HTMLButtonElement(value, height, width, top, left);
         }
 
-        public Element CreateTextBlock(string value, int height, int width, int top, int left)
+        public Element CreateTextBlock(string value, string height, string width, string top, string left)
         {
             return new HTMLTextBlockElement(value, height, width, top, left);
         }

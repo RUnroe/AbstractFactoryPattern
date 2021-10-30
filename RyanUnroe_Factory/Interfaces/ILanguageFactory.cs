@@ -10,8 +10,8 @@ namespace RyanUnroe_Factory.Interfaces
     {
         //create button element
         //create text block element
-        Element CreateButton(string value, int height, int width, int top, int left);
-        Element CreateTextBlock(string value, int height, int width, int top, int left);
+        Element CreateButton(string value, string height, string width, string top, string left);
+        Element CreateTextBlock(string value, string height, string width, string top, string left);
 
     
     }

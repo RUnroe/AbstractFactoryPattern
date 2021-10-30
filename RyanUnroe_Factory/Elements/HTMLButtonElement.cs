@@ -9,7 +9,7 @@ namespace RyanUnroe_Factory.Elements
 {
     public class HTMLButtonElement : Element
     {
-        public HTMLButtonElement(string value, int height, int width, int top, int left)
+        public HTMLButtonElement(string value, string height, string width, string top, string left)
         : base(value, height, width, top, left) { }
         public override string getCode()
         {

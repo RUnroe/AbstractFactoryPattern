@@ -8,7 +8,7 @@ namespace RyanUnroe_Factory.Interfaces
 {
     public abstract class Element
     {
-        public Element(string value, int height, int width, int top, int left)
+        public Element(string value, string height, string width, string top, string left)
         {
             this.Value = value;
             this.Height = height;
@@ -19,10 +19,10 @@ namespace RyanUnroe_Factory.Interfaces
 
         
         public string Value { get; set; }
-        public int Height { get; set; }
-        public int Width { get; set; }
-        public int Top { get; set; }
-        public int Left { get; set; }
+        public string Height { get; set; }
+        public string Width { get; set; }
+        public string Top { get; set; }
+        public string Left { get; set; }
 
         public abstract string getCode();
     }
